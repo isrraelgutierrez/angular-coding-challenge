@@ -1,6 +1,6 @@
-# safeREACH Angular Coding Challenge
+# Angular Coding Challenge
 
-Welcome the safeREACH coding challenge!
+Welcome the Angular coding challenge!
 
 This is a simple web application for showing user profiles built with Angular 14.
 
