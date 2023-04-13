@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import * as marked from 'marked';
+import { switchMap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -32,16 +34,18 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.id = +params['id'];
-      this._userService.findOneById(this.id).subscribe(
-        (data) => {
+      this._userService.findOneById(this.id).pipe(
+        switchMap(data => {
           const _marked: any = marked;
           this.userData = data;
           this.userData.bio = _marked.parse(data.bio);
-        },
-        (error) => {
+          return of(null);
+        }),
+        catchError(error => {
           this._router.navigate(['/']);
-        }
-      );
+          return of(null);
+        })
+      ).subscribe();
     });
   }
 }
