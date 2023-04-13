@@ -1,5 +1,5 @@
-<div>
+<div @fade>
   <h1>{{userData?.name}}</h1>
-  <img [src]="userData?.profilePicture"/>
-  <p>{{userData?.bio}}</p>
-  </div>
+  <img [src]="userData?.profilePicture" />
+  <div [innerHTML]="userData?.bio"></div>
+</div>
